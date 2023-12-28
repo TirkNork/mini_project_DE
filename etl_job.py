@@ -28,8 +28,8 @@ def get_date_range(start_date_str):
     start_date = thailand_timezone.localize(start_date)  # Make start_date timezone-aware
     
     # Get the current date and time in Thailand's timezone
-    current_time_thailand = datetime.now(thailand_timezone)
-    
+    current_time_thailand = datetime.now(thailand_timezone)  
+
     # Initialize lists to storepaths
     path_list = []
     
@@ -113,7 +113,7 @@ def load_postgres(customer):
     database_url = f"postgresql+psycopg2://{postgres_info['username']}:{postgres_info['password']}@{postgres_info['host']}:{postgres_info['port']}/{database}"
     engine = create_engine(database_url)
     print(f"Writing to database {postgres_info['username']}.{table_name} with {customer.shape[0]} records")
-    customer.to_sql(table_name, engine, if_exists='replace', index=False)
+    customer.to_sql(table_name, engine, if_exists='append', index=False)
     print("Write successfully!")
 
 @flow(log_prints=True)
